@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Authentication Required</title>
+    <link rel="icon" href="logo.jpg" type="image">
 </head>
 <body>
 

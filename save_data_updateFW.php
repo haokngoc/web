@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     file_put_contents($xmlFileName, $xml->asXML());
 
 
-    header("Location: home.php");
+    header("Location: firmware.php");
     exit();
 } else {
     header("Location: index.php");
