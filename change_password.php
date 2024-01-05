@@ -23,8 +23,8 @@
 <div class="container">
     <p><strong>Change Password</strong></p>
     <form action="save_data_changepw.php" method="post">
-        <label for="new_pasword">New Password</label>
-        <input type="text" id="new_pasword" name="new_pasword">
+        <label for="new_password">New Password</label>
+        <input type="text" id="new_password" name="new_password">
         <br>
         <label for="confirm_new_pasword">Confirm New Password</label>
         <input type="text" id="confirm_new_pasword" name="confirm_new_pasword">

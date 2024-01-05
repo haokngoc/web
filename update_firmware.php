@@ -33,11 +33,9 @@
     <p>this page or issu any other commands to the receptor during this process</p>
     <br>
     <p>Do you wish to continue</p>
-    <form action="save_data_updateFW.php" action="firmware.php" method="post">
-        <input type="text" id="firmware" name="firmware">
-        <label for="firmware">Browse</label>
-        <br>
-        <button type="submit" name="update-button">Update Firmware</button>
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Firmware" name="submit">
     </form>
 </div>
 </body>

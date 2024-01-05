@@ -14,7 +14,7 @@
     <input type="text" id="username" name="username" required>
     <br>
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
+    <input type="text" id="password" name="password" required>
     <br>
     <input type="submit" value="Log In">
     <input type="button" value="Cancel" onclick="location.href='index.php';">

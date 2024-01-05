@@ -1,16 +1,12 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Lấy thông tin từ form
-    $newPassword = $_POST["new_pasword"];
+    $newPassword = $_POST["new_password"];
     $confirmNewPassword = $_POST["confirm_new_pasword"];
-    $xmlFileName = 'data.xml';
-    $xmlString = file_get_contents($xmlFileName);
-    $xml = new SimpleXMLElement($xmlString);
-
-    $changepw = $xml->addChild('changepw');
-    $changepw->addChild('new-password', $newPassword);
-    $changepw->addChild('confirm-new-password', $confirmNewPassword);
-    file_put_contents($xmlFileName, $xml->asXML());
+    $jsonFileName = 'data.json';
+    $jsonData = file_exists($jsonFileName) ? json_decode(file_get_contents($jsonFileName), true) : array();
+    $jsonData['account_information']['password'] = $newPassword;
+    $json_data = json_encode($jsonData, JSON_PRETTY_PRINT);
+    file_put_contents($jsonFileName, $json_data);
     header("Location: home.php");
     exit();
 } else {

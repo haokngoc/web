@@ -1,0 +1,18 @@
+{
+    "account_information": {
+        "username": "admin",
+        "password": "456"
+    },
+    "settings": {
+        "ip-address": "123",
+        "logging-method": "123",
+        "logging-level": "123",
+        "wireless-mode": "123",
+        "wireless-SSID": "123",
+        "wireless-Pass-Phrase": "123"
+    },
+    "firmware": {
+        "filename": "medicine.png",
+        "path": "uploads\/medicine.png"
+    }
+}

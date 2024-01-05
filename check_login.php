@@ -4,23 +4,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Lấy thông tin từ form
     $username = $_POST["username"];
     $password = $_POST["password"];
-    if ($username === "admin" && $password === "123123") {
-        $xml = new SimpleXMLElement('<data></data>');
-        $xml->addChild('username', $username);
-        $xml->addChild('password', $password);
-        $xmlString = $xml->asXML();
-        $xmlFileName = 'data.xml';
-        $file = fopen($xmlFileName, 'w');
-        if ($file) {
-            fwrite($file, $xmlString);
-            fclose($file);
-            header("Location: home.php");
-            exit();
-        } else {
-            echo "Error writing to XML file.";
-            header("Location: index.php");
-            exit();
-        }
+    $jsonData = file_get_contents('data.json');
+    $dataArray = json_decode($jsonData, true);
+    $current_password = $dataArray['account_information']['password'];
+    if ($username === "admin" && $password === $current_password) {
+        // Đọc dữ liệu từ tệp JSON hiện tại (nếu có)
+        $jsonFileName = 'data.json';
+        $jsonData = file_exists($jsonFileName) ? json_decode(file_get_contents($jsonFileName), true) : array();
+
+        // Thêm thông tin mới vào mảng dữ liệu
+        $jsonData['account_information']['username'] = $username;
+        $jsonData['account_information']['password'] = $password;
+
+        // Chuyển đổi mảng thành định dạng JSON và lưu vào tệp
+        $json_data = json_encode($jsonData, JSON_PRETTY_PRINT);
+        file_put_contents($jsonFileName, $json_data);
+
+        header("Location: home.php");
+        exit();
     } else {
         header("Location: authentication_failed.php");
         exit();

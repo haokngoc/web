@@ -7,20 +7,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $wirelessSSID = $_POST["wireless-SSID"];
     $wirelessPassPhrase = $_POST["wireless-Pass-Phrase"];
 
+    // Đọc dữ liệu từ tệp JSON hiện tại (nếu có)
+    $jsonFileName = 'data.json';
+    $jsonData = file_exists($jsonFileName) ? json_decode(file_get_contents($jsonFileName), true) : array();
 
-    $xmlFileName = 'data.xml';
-    $xmlString = file_get_contents($xmlFileName);
-    $xml = new SimpleXMLElement($xmlString);
+    // Thêm thông tin mới vào mảng dữ liệu
+    $jsonData['settings']['ip-address'] = $ipAddress;
+    $jsonData['settings']['logging-method'] = $loggingMethod;
+    $jsonData['settings']['logging-level'] = $loggingLevel;
+    $jsonData['settings']['wireless-mode'] = $wirelessMode;
+    $jsonData['settings']['wireless-SSID'] = $wirelessSSID;
+    $jsonData['settings']['wireless-Pass-Phrase'] = $wirelessPassPhrase;
 
-    $settings = $xml->addChild('settings');
-    $settings->addChild('ip-address', $ipAddress);
-    $settings->addChild('logging-method', $loggingMethod);
-    $settings->addChild('logging-level', $loggingLevel);
-    $settings->addChild('wireless-mode', $wirelessMode);
-    $settings->addChild('wireless-SSID', $wirelessSSID);
-    $settings->addChild('wireless-Pass-Phrase', $wirelessPassPhrase);
-    file_put_contents($xmlFileName, $xml->asXML());
-
+    // Chuyển đổi mảng thành định dạng JSON và lưu vào tệp
+    $json_data = json_encode($jsonData, JSON_PRETTY_PRINT);
+    file_put_contents($jsonFileName, $json_data);
 
     header("Location: home.php");
     exit();
